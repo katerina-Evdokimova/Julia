@@ -1,13 +1,10 @@
 #Задача2
 #Julia
-•	function mark_frame_perimetr!(r::Robot)
-        num_vert = moves!(r, Sud)
-        num_hor = moves!(r, West)
-        for sidе in (Nord, Ost, Sud, West)
-                       putmarkers!(r, side)
-        end
-        moves!(r, Nord, num_vert)
-        moves!(r, Ost, num_hor)
+function putmarkers!(r::Robot, side::HorizonSide)
+              while isborder(r,side)==false
+                      move!(r,side)
+                      putmarker!(r)
+               end
 end
 function moves!(r::Robot, side::HorizonSide)
         num_steps=0
@@ -22,11 +19,14 @@ function moves!(r::Robot,side::HorizonSide,num_steps::Int)
                        move!(r,side)
             end
 end
-•	 
-function putmarkers!(r::Robot, side::HorizonSide)
-              while isborder(r,side)==false
-                      move!(r,side)
-                      putmarker!(r)
-               end
+function mark_frame_perimetr!(r::Robot)
+        num_vert = moves!(r, Sud)
+        num_hor = moves!(r, West)
+        for sidе in (Nord, Ost, Sud, West)
+                       putmarkers!(r, side)
+        end
+        moves!(r, Nord, num_vert)
+        moves!(r, Ost, num_hor)
 end
+
 
